@@ -1,5 +1,5 @@
 ## RainClock
-[![Watch this video for visualization](https://https://github.com/harris222/rainClock/edit/master/rain.png)](https://youtu.be/jxEaO49S8OQ)
+[![Watch this video for visualization](https://https://github.com/harris222/rainClock/blobl/master/rain.png)](https://youtu.be/jxEaO49S8OQ)
 
 ## Problem Statement
 Inspired by rainymood.com, rain clock is a webapp that calms you down after a strenuous day of work.
