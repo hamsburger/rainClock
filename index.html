@@ -4,13 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>A Digital Analog Clock</title>
+    <title>A Digital Clock</title>
     <link rel="stylesheet" href="style.css" type="text/css" media="all">
     <script src="script.js" defer></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 
 <body>
+
+<!-- This block of code draws a clock using SVG -->
 <main class="main">
     <div class="clockbox">
         <svg id="clock" xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 600 600">
@@ -34,8 +36,10 @@
         </svg>
     </div><!-- .clockbox -->
 
+    <!-- Rain generated using javascript and jQuery --> 
     <div class = "rainGenerator"></div>
 
+    <!-- Audio files -->
     <audio src = "tick.mp3" class = "tick"></audio>
     <audio src = "oh.mp3" class = "kanna"></audio>
     <audio src = "maid.mp3" class = "maid"></audio>
