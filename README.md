@@ -3,8 +3,8 @@
 ## Problem Statement
 Inspired by rainymood.com, rain clock is a webapp that calms you down after a strenuous day of work.
 Imagine yourself crouching in a glass box -- floating in the middle of the sky -- as showers obliviate you from society.
-You are finally free from the rustling of boots against the floor and the words that people speak,
-And you are finally given time to think about "What life really means to you?".
+You are finally free from the rustling of rubber boots against the floor and the words that people speak,
+and you are finally given time to think about "What life really means to you?".
 
 This app aims to give you the peace of mind to reflect on yourself -- the work you've done, the sacrifices that you have made, the fears
 you have or haven't conquered, and the beauty that you appreciate. 
