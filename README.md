@@ -1,4 +1,5 @@
 ## RainClock
+[![Watch this video for visualization](https://https://github.com/harris222/rainClock/edit/master/rain.png)](https://youtu.be/jxEaO49S8OQ)
 
 ## Problem Statement
 Inspired by rainymood.com, rain clock is a webapp that calms you down after a strenuous day of work.
@@ -12,8 +13,6 @@ This app aims to give you the peace of mind to reflect on yourself -- the work y
 you have or haven't conquered, and the beauty that you appreciate. 
 
 ## Current Features
-
-[![Watch this video for visualization](image)](https://youtu.be/jxEaO49S8OQ)
 
 For more specific implementation of features, refer to code in this repository. 
 - A screen full of raindrops that begin falling from the top of the screen. 
