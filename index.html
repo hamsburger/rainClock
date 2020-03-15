@@ -12,8 +12,15 @@
 
 <body>
 
+<div class = "sliderContainer">
+    <input type = "range" min = "1" max = "100" value = "50" class="slider" id="myRange"></input>
+    <p style = "float: right; word-break: break-all; color: white;
+    margin-right: 6.8vw; line-height: 3.5;" data-toggle-id="volume"> Volume Control </p>
+</div>
+
 <!-- This block of code draws a clock using SVG -->
 <main class="main">
+
     <div class="clockbox">
         <svg id="clock" xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 600 600">
             <g id="face">
@@ -37,13 +44,13 @@
     </div><!-- .clockbox -->
 
     <!-- Rain generated using javascript and jQuery --> 
-    <div class = "rainGenerator"></div>
+    <div id = "rainGenerator"></div>
 
     <!-- Audio files -->
-    <audio src = "tick.mp3" class = "tick"></audio>
-    <audio src = "oh.mp3" class = "kanna"></audio>
-    <audio src = "maid.mp3" class = "maid"></audio>
-    <audio src = "rain.mp3" class = "rain"></audio>
+    <audio src = "./tick.mp3" id = "tick"></audio>
+    <audio src = "./oh.mp3" id = "kanna"></audio>
+    <audio src = "./maid.mp3" id = "maid"></audio>
+    <audio src = "./rain.mp3" id = "rain"></audio>
 </main>
 
 </body>

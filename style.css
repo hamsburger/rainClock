@@ -1,6 +1,7 @@
 /* Layout */
 body{
   height: 100%;
+  width: 100%;
   overflow:hidden;
   background: linear-gradient(to top, rgb(230,230,230), #0D343A);
   background-repeat: no-repeat;
@@ -11,7 +12,7 @@ body{
     padding: 2em;
     height: 90vh;
     justify-content: center;
-    align-items: middle;
+    align-items: center;
 }
 
 .clockbox,
@@ -89,3 +90,47 @@ body{
   }
 
 }
+
+/************************************* Slider *******************************/
+.sliderContainer {
+    position: fixed;
+    width: 100%;
+    
+}
+  
+.slider {
+    position: absolute;
+    -webkit-appearance: none;
+    width: 20%;
+    right: 10px;
+    margin-right: 0;
+    height: 15px;
+    border-radius: 5px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+  }
+  
+  .slider:hover {
+    opacity: 1;
+  }
+  
+  .slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #4CAF50;
+    cursor: pointer;
+  }
+  
+  .slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #4CAF50;
+    cursor: pointer;
+  }

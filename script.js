@@ -20,19 +20,19 @@ https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API.
 This is done so that I can control audio in javascript.
 */
 const audioContext = new AudioContext();
-const tick = document.querySelector('.tick');
+const tick = document.querySelector('#tick');
 const track1 = audioContext.createMediaElementSource(tick);
 track1.connect(audioContext.destination);
 
-const kanna = document.querySelector('.kanna');
+const kanna = document.querySelector('#kanna');
 const track2 = audioContext.createMediaElementSource(kanna);
 track2.connect(audioContext.destination);
 
-const maid = document.querySelector('.maid');
+const maid = document.querySelector('#maid');
 const track3 = audioContext.createMediaElementSource(maid);
 track3.connect(audioContext.destination);
 
-const rain = document.querySelector('.rain');
+const rain = document.querySelector('#rain');
 const track4 = audioContext.createMediaElementSource(rain);
 track4.connect(audioContext.destination);
 
@@ -51,31 +51,35 @@ function runClock(){
     currWindowWidth = window.innerWidth;
   }
 
+  /******************************************************** CLOCK LOGIC  ******************************************/
   seconds = seconds + 1;
-
-  // Continuously play rain audio
-  if (rain.paused){
-    rain.play();
+  if (minutes % 60 == 0 && seconds % 60 == 0){
+    hours += 1;
   }
-
 
   // An anime character squeals every 1 minute.
   if (seconds % 60 == 0){
     minutes += 1;
-    kanna.play();
+
+    if(kanna.paused) kanna.play();
   }
 
-  // An anime character squeals every 10 minutes
-  if (minutes % 10 == 0){
-    maid.play();
-  } else if (minutes % 60 == 0){
-      hours += 1;
-  }
 
   // Move by a certain number of degrees every time the time increments
   HOURHAND.style.transform = "rotate(" +  hours*(360/12) + "deg)";
   MINUTEHAND.style.transform = "rotate(" + minutes*(360/60) + "deg)";
   SECONDHAND.style.transform = "rotate(" + seconds*(360/60) + "deg)";
+
+  // Continuously play rain audio
+  if (rain.paused) {
+    rain.play();
+  }
+
+  // An anime character squeals every 10 minutes
+  if (minutes % 10 == 0){
+    if (maid.paused) maid.play();
+  } 
+  
 }
 
 /* Function: playRain
@@ -99,15 +103,20 @@ function playRain(){
     dropLeft = Math.random() * (window.innerWidth);
     dropTop = Math.random() * (window.innerHeight) - window.innerHeight/4;
 
-    $('.rainGenerator').append("<div class='rain' id='rain" + i + "'></div>");
+    $('#rainGenerator').append("<div class='rain' id='rain" + i + "'></div>");
 
-    $("#rain" + i).css('left', dropLeft);
-    $("#rain" + i).css('top', dropTop);
-    $("#rain" + i).css('animation', 'rainFall infinite linear ' + timeOfRainfall + 's');
+    $("#rain" + i, "#rainGenerator").css('left', dropLeft);
+    $("#rain" + i, "#rainGenerator").css('top', dropTop);
+    $("#rain" + i, "#rainGenerator").css('animation', 'rainFall infinite linear ' + timeOfRainfall + 's');
   } // for
+}
+
+document.querySelector(".slider").oninput = function() {
+  let myMedia = document.getElementById("rain");
+  myMedia.volume = this.value/100;
 }
 
 window.onload = function(){
   playRain();
   var interval = setInterval(runClock, 1000); // Clock is updated every second
-};
+}
