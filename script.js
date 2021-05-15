@@ -21,20 +21,10 @@ This is done so that I can control audio in javascript.
 */
 const audioContext = new AudioContext();
 const tick = document.querySelector('#tick');
-const track1 = audioContext.createMediaElementSource(tick);
-track1.connect(audioContext.destination);
-
 const kanna = document.querySelector('#kanna');
-const track2 = audioContext.createMediaElementSource(kanna);
-track2.connect(audioContext.destination);
-
 const maid = document.querySelector('#maid');
-const track3 = audioContext.createMediaElementSource(maid);
-track3.connect(audioContext.destination);
-
 const rain = document.querySelector('#rain');
-const track4 = audioContext.createMediaElementSource(rain);
-track4.connect(audioContext.destination);
+
 
 
 /* Function : runClock()
