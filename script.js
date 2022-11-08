@@ -11,31 +11,48 @@ let minutes = date.getMinutes();
 let seconds = date.getSeconds();
 let currWindowWidth = window.innerWidth;
 let currWindowHeight = window.innerHeight;
-let minuteCounter = 0;
-let removeCounter = 0; // notifies program to remove rain that goes outside of client window bounds.
-let rateOfRain = 2; // 2 is the default value for the rate of rain. Users can feel free to change this value using a slidey bar
+let rateOfRain = 2; // 2 is the default value for the rate of rain.
+let instructionStepCounter = -1;
 
-/* Create media files that connect to the Web Audio API:
-https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API.
-This is done so that I can control audio in javascript.
-*/
-const audioContext = new AudioContext();
-const tick = document.querySelector('#tick');
+/* Audio files */
 const kanna = document.querySelector('#kanna');
 const maid = document.querySelector('#maid');
 const rain = document.querySelector('#rain');
+
+/* Instruction Elements */
+const instructionBox = document.querySelector("#instruction-box");
+let stepCounter = document.querySelector("#step-counter");
+let instructionContent = document.querySelector("#instruction-box > .content");
+const instructionObjs = [{
+                          "instruction": "Move the slider on the right of this dialog box to adjust volume",
+                          "top" : "2.5%",
+                          "right" : "25%"
+                        },
+                        {
+                          "instruction" : "Anime sounds will reverbrate from the clock on minute and hour intervals. " +
+                                           "Use this for the advantage of your use case, such as meditation.",
+                          "top" : "10%",
+                          "left" : "12%"
+                        }
+                      ];
+const prevButton = document.querySelector("#prev-button");
+const nextButton = document.querySelector("#next-button");
+const closeButton = document.querySelector("#close-button");
+
+/* Buttons */
+const help = document.querySelector("#help");
+
 
 
 
 /* Function : runClock()
 *  Description: Move clock hands according to current time and update bounds of rainfall when
-client resizes screen dimensions. */
+client resizes screen dimensi"ons. */
 function runClock(){
 
   /* Note to self: Although I could use a removeCounter to keep track of when I should redraw the rain to fit within the bounds of
   current client screen, I could've also used window.resize. */
   if (currWindowHeight - window.innerHeight != 0 || currWindowWidth - window.innerWidth != 0){
-    removeCounter += 1;
     playRain();
     currWindowHeight = window.innerHeight;
     currWindowWidth = window.innerWidth;
@@ -56,7 +73,7 @@ function runClock(){
 
 
   // Move by a certain number of degrees every time the time increments
-  HOURHAND.style.transform = "rotate(" +  hours*(360/12) + "deg)";
+  HOURHAND.style.transform = "rotate(" +  (hours*(360/12) + 360/12 * minutes/60)  + "deg)";
   MINUTEHAND.style.transform = "rotate(" + minutes*(360/60) + "deg)";
   SECONDHAND.style.transform = "rotate(" + seconds*(360/60) + "deg)";
 
@@ -73,22 +90,15 @@ function runClock(){
 }
 
 /* Function: playRain
-* Description: Removes rain if there is rain outside the bounds of the client screen (or when removeCounter == 1);
-* Otherwise, this function simply produces rain within the bounds of the screen, which are represented
-by gradient lines (See .rain{} in style.css)
+*  Description: Removes rain if client resizes window
+*  Otherwise, this function simply produces rain within the bounds of the screen, which are represented 
+*  by gradient lines (See .rain{} in style.css)
 */
-
-/* Question of the Day: What's the slowest rate of rain I can produce so that
-* the rain would immediately regenerate after it finishes its animation loop?
-
-How do I derive a formula for rate of rain wrt to when all the rain stops generating? */
 function playRain(){
 
-  for(i = 0; i < 429; i++){
-    let timeOfRainfall = Math.random()*(rateOfRain) + 2; // Time of rainfall varies from 1s to 3s
-    if (removeCounter > 0){
-        $('#rain' + i).remove();
-    }
+  for(i = 0; i < 350; i++){
+    let timeOfRainfall = Math.random()*(rateOfRain) + 1; // Time of rainfall varies from 0s to 3s    
+    $('#rain' + i).remove();
 
     dropLeft = Math.random() * (window.innerWidth);
     dropTop = Math.random() * (window.innerHeight) - window.innerHeight/4;
@@ -101,12 +111,81 @@ function playRain(){
   } // for
 }
 
+
+function updateInstructions(index){
+  if (instructionObjs[index].right){
+    instructionBox.style.right = instructionObjs[index].right;
+    instructionBox.style.left = '';
+  }
+  if (instructionObjs[index].left){
+    instructionBox.style.left = instructionObjs[index].left;
+    instructionBox.style.right = '';
+  }
+
+  instructionBox.style.top = instructionObjs[index].top;
+  instructionContent.innerHTML = instructionObjs[index].instruction;
+  stepCounter.innerHTML = `Help Dialog ${index + 1} out of 2`;
+}
+
+/**
+ * Events
+ */
+help.onclick = function(){
+  instructionStepCounter++; // Initialize instructions counter
+  instructionBox.setAttribute("style", "display:flex;");
+  updateInstructions(instructionStepCounter);
+}
+
+prevButton.onclick = function(){
+  if (instructionStepCounter > 0){
+    instructionStepCounter--
+    updateInstructions(instructionStepCounter);
+  }
+}
+
+nextButton.onclick = function(){
+  if (instructionStepCounter < 1){
+    instructionStepCounter++;
+    updateInstructions(instructionStepCounter);
+  }
+}
+
+closeButton.onclick = function(){
+  instructionStepCounter = -1;
+  instructionBox.setAttribute("style", "display:none;");
+  stepCounter.innerHTML = '';
+  instructionContent.innerHTML = '';
+  instructionBox.style.top = '';
+  instructionBox.style.left = '';
+  instructionBox.style.right = '';
+}
+
 document.querySelector(".slider").oninput = function() {
   let myMedia = document.getElementById("rain");
-  myMedia.volume = this.value/100;
+  let selectedVolume = this.value;
+  myMedia.volume = selectedVolume/100;
+
+
+  if (selectedVolume == 0){
+    kanna.volume = 0;
+    maid.volume = 0;
+  } else if (selectedVolume <= 50){
+    kanna.volume = 0.5;
+    maid.volume = 0.5; 
+  } else {
+    kanna.volume = 1;
+    maid.volume = 1;
+  } 
 }
 
 window.onload = function(){
+
+  /**
+   * Initialize volumes and play rain
+   */
+  kanna.volume = 0;
+  maid.volume = 0;
+  rain.volume = 0;
   playRain();
   var interval = setInterval(runClock, 1000); // Clock is updated every second
 }

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en-US">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,47 +10,64 @@
 </head>
 
 <body>
+    <div class = "sliderContainer">
+        <div class = "sliderBox">
+            <input type = "range" min = "0" max = "100" value = "0" class="slider" id="myRange"></input>
+            <p data-toggle-id="volume" style="text-align: center; color: white; margin-top: 40px;
+                                                word-break: keep-all;"> Volume Control </p>
+        </div>
+    </div>
 
-<div class = "sliderContainer">
-    <input type = "range" min = "1" max = "100" value = "50" class="slider" id="myRange"></input>
-    <p style = "float: right; word-break: break-all; color: white;
-    margin-right: 6.8vw; line-height: 3.5;" data-toggle-id="volume"> Volume Control </p>
-</div>
+    <button id = "help">
+        Help
+    </button>
 
-<!-- This block of code draws a clock using SVG -->
-<main class="main">
+    <div id="instruction-box">
+        <header>
+            <div id="step-counter" style="letter-spacing: .1em;"><b>Help 1 out of 2</b></div>
+            <button id="close-button">&#x2716</button>   
+        </header>
+        <div class="content">
+        </div>
+        <footer>
+            <button id="prev-button">Prev</button>
+            <button id="next-button">Next</button>
+        </footer>
+    </div>
+        
+        
+    <!-- This block of code draws a clock using SVG -->
+    <main class="main">
+        <div class="clockbox">
+            <svg id="clock" xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 600 600">
+                <g id="face">
+                    <circle class="circle" cx="300" cy="300" r="253.9"/>
+                    <path class="hour-marks" d="M300.5 94V61M506 300.5h32M300.5 506v33M94 300.5H60M411.3 107.8l7.9-13.8M493 190.2l13-7.4M492.1 411.4l16.5 9.5M411 492.3l8.9 15.3M189 492.3l-9.2 15.9M107.7 411L93 419.5M107.5 189.3l-17.1-9.9M188.1 108.2l-9-15.6"/>
+                    <circle class="mid-circle" cx="300" cy="300" r="16.2"/>
+                </g>
+                <g id="hour">
+                    <path class="hour-arm" d="M300.5 298V142"/>
+                    <circle class="sizing-box" cx="300" cy="300" r="253.9"/>
+                </g>
+                <g id="minute">
+                    <path class="minute-arm" d="M300.5 298V67"/>
+                    <circle class="sizing-box" cx="300" cy="300" r="253.9"/>
+                </g>
+                <g id="second">
+                    <path class="second-arm" d="M300.5 350V55"/>
+                    <circle class="sizing-box" cx="300" cy="300" r="253.9"/>
+                </g>
+            </svg>
+        </div><!-- .clockbox -->
 
-    <div class="clockbox">
-        <svg id="clock" xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 600 600">
-            <g id="face">
-                <circle class="circle" cx="300" cy="300" r="253.9"/>
-                <path class="hour-marks" d="M300.5 94V61M506 300.5h32M300.5 506v33M94 300.5H60M411.3 107.8l7.9-13.8M493 190.2l13-7.4M492.1 411.4l16.5 9.5M411 492.3l8.9 15.3M189 492.3l-9.2 15.9M107.7 411L93 419.5M107.5 189.3l-17.1-9.9M188.1 108.2l-9-15.6"/>
-                <circle class="mid-circle" cx="300" cy="300" r="16.2"/>
-            </g>
-            <g id="hour">
-                <path class="hour-arm" d="M300.5 298V142"/>
-                <circle class="sizing-box" cx="300" cy="300" r="253.9"/>
-            </g>
-            <g id="minute">
-                <path class="minute-arm" d="M300.5 298V67"/>
-                <circle class="sizing-box" cx="300" cy="300" r="253.9"/>
-            </g>
-            <g id="second">
-                <path class="second-arm" d="M300.5 350V55"/>
-                <circle class="sizing-box" cx="300" cy="300" r="253.9"/>
-            </g>
-        </svg>
-    </div><!-- .clockbox -->
+        <!-- Rain generated using javascript and jQuery --> 
+        <div id = "rainGenerator"></div>
 
-    <!-- Rain generated using javascript and jQuery --> 
-    <div id = "rainGenerator"></div>
-
-    <!-- Audio files -->
-    <audio src="./tick.mp3" id="tick"></audio>
-    <audio src="./oh.mp3" id="kanna"></audio>
-    <audio src="./maid.mp3" id="maid"></audio>
-    <audio autoplay id="rain" src="./rain.mp3"></audio>
-</main>
+        <!-- Audio files -->
+        <audio src="./oh.mp3" id="kanna"></audio>
+        <audio src="./maid.mp3" id="maid"></audio>
+        <audio loop id="rain" src="./rain.mp3"></audio>
+    </main>
 
 </body>
 
