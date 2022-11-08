@@ -18,8 +18,8 @@ you have or haven't conquered, and the beauty that you appreciate.
 
 - A clock that represents that current time, allowing you to keep track of your reflection time. 
 - Anime voice that remind you of the time, in case you reflect with your eyes closed (ex. Meditate). 
-    - ![Kanna squeals every minute](https://www.youtube.com/watch?v=1aNIRzcLSwk) 
-    - ![Maid-sama screams at Usui at every hour](https://youtu.be/kEmE3QwSf3s?t=23)
+    - [Kanna squeals every minute](https://www.youtube.com/watch?v=1aNIRzcLSwk) 
+    - [Maid-sama screams at Usui at every hour](https://youtu.be/kEmE3QwSf3s?t=23)
 
 - Adjust volume of all sounds on the web app, just in case if you don't want any interruptions at the moment.
 - Instructions on how to use the app. (control volume, listen to the rain and clock)
